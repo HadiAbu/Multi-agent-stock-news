@@ -41,7 +41,7 @@ flowchart LR
 | Models | Anthropic by default via `langchain-anthropic`, switchable by environment variable, a cheaper model for CI |
 | Evals | Frozen synthetic news snapshots, citation validity, unsupported-claim rate, abstention on thin news, and about 20 paired clean/poisoned prompt-injection cases |
 | Tracing | Langfuse is the leading candidate (decision still open) |
-| Delivery | Standalone engine package, then a FastAPI service, then a small UI |
+| Delivery | Standalone Python engine package (`stock_news_desk`, built with `uv`) in this repo; a FastAPI service and a small UI later, each in its own repo |
 | Safety | Pre-push secret and path scanning, both as a local hook and in CI |
 
 ## Design decisions so far
@@ -58,11 +58,12 @@ The work follows a "wayfinder" process: the project is charted as a map of small
 
 | Ticket | State |
 |---|---|
+| Repo and package layout | Closed |
 | Prompt-injection threat model | Closed |
 | Demo privacy | Closed |
 | Data sources and terms | Research done, under review |
 | Tracing stack | Research done, decision open |
-| Repo layout, analysis schema, supervisor design, output and abstention policy, eval metrics, cost budget, LangGraph vs CrewAI protocol, full-article fetching | Open |
+| Analysis schema, supervisor design, output and abstention policy, eval metrics, cost budget, LangGraph vs CrewAI protocol, relationship to Freeman, full-article fetching | Open |
 
 ## Roadmap
 
@@ -74,4 +75,4 @@ The work follows a "wayfinder" process: the project is charted as a map of small
 
 ## License
 
-To be decided as part of the repo-layout ticket.
+MIT for the code, see [LICENSE](LICENSE). Committed eval data keeps the terms of its source.

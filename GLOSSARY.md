@@ -32,6 +32,14 @@ _Avoid_: Point, argument, finding
 The link from a claim to the facts that support it, shown to the reader as the underlying source.
 _Avoid_: Reference, link, footnote
 
+**Quarantine boundary**:
+The point after Triage. Only Triage reads raw source text; every later agent sees only quote-verified facts.
+_Avoid_: Sandbox, sanitizer
+
+**Ruling**:
+The Critic's decision on one claim: `accept`, `reject` or `revise`, with a reason.
+_Avoid_: Verdict, review, score
+
 ### Output
 
 **News lean**:

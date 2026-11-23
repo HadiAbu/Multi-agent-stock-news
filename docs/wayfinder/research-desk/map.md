@@ -19,6 +19,8 @@ A design spec for an open-source "research desk". Given a ticker and a news snap
 - Default model Anthropic, env-switchable.
 - Delivery: engine as a standalone package, then a FastAPI service, then a small UI.
 - Tracing candidate: Langfuse (MIT outside `ee/`, free tier, LangGraph and CrewAI support); see `07-research.md`. Not yet closed.
+- [Demo privacy](13-demo-privacy-and-synthetic-portfolio.md) (closed): no personalization in v1, ticker-only analysis; fixed never-copy list; pre-push check is a local hook plus a CI job running gitleaks and a personal-path grep.
+- Data plan candidate, from `12-research.md` (not yet closed, awaiting the author's read): do not commit Finnhub data (its terms bar redistributing data or derived results); use GDELT with citation and SEC EDGAR for the live demo; evals use synthetic or self-written articles, EDGAR excerpts and optionally GDELT title/URL/date metadata; CI uses fixtures and mocks, no live calls. Several points unverified in the note.
 
 ## Not yet specified
 Hosting and deploy target, the UI, where MCP fits, memory across runs, live price or fundamentals data.
@@ -27,10 +29,11 @@ Hosting and deploy target, the UI, where MCP fits, memory across runs, live pric
 - Price forecasts or trade execution.
 - Using real holdings or personal data in the public demo.
 - Accounts and multi-user support.
+- Personalization ("use my position") in v1; may return later with a synthetic portfolio.
 - The earlier PR code-review idea (archived in `archive/`).
 
 ## Open tickets
-See the `NN-*.md` files in this folder; each lists its type and what blocks it. Frontier: 01, 07, 08, 12, 13.
+See the `NN-*.md` files in this folder; each lists its type and what blocks it. Frontier: 01, 07, 08, 12 (research done, awaiting review). Closed: 13.
 
 ## Archive
 `archive/` holds the retired PR-review tickets 05 (eval datasets) and 11 (GitHub Action constraints) with their research notes. Their licence findings were verified on 2026-11-23: CVEfixes source MIT and data CC BY 4.0, BugsJS, SWE-bench and AgentDojo MIT, BugsInPy has no licence.

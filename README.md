@@ -52,6 +52,12 @@ flowchart LR
 - **Data:** no data from sources whose terms forbid redistribution is committed or shown. The live demo uses GDELT (cited) and SEC EDGAR, CI runs on fixtures with mocks, and the eval set is mostly synthetic articles plus a few EDGAR excerpts. GDELT supplies headlines only, so thin snapshots are expected. Research: [12-research.md](docs/wayfinder/research-desk/12-research.md).
 - **Out of scope:** price forecasts, trade execution, accounts, real personal data.
 
+## Known limitations
+
+- **Headlines, not articles.** The desk reads GDELT headlines and SEC EDGAR filing text. It does not fetch publisher article pages, so analyses built from headlines are shallow and many tickers will come back `unclear`. That is the desk working as designed.
+- **Synthetic evals.** The eval set is mostly written by a model and reviewed by a person, so scores will look better than real-world performance. A few real filing excerpts keep it grounded.
+- **No price or fundamentals data,** and no personalization in v1.
+
 ## How the design is being done
 
 The work follows a "wayfinder" process: the project is charted as a map of small decision tickets, each resolved in its own session, and nothing is built until the design is approved. The map and tickets live in [`docs/wayfinder/research-desk/`](docs/wayfinder/research-desk/map.md).
@@ -69,7 +75,8 @@ The work follows a "wayfinder" process: the project is charted as a map of small
 | Data sources and terms | Closed |
 | Tracing stack | Closed |
 | Eval metrics, snapshots and CI gating | Closed |
-| LangGraph vs CrewAI protocol, full-article fetching | Open |
+| Full-article fetching | Closed (not in v1) |
+| LangGraph vs CrewAI protocol | Open |
 
 ## Roadmap
 

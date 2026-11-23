@@ -22,6 +22,7 @@ A design spec for an open-source "research desk". Given a ticker and a news snap
 - [Tracing stack](07-tracing-stack.md) (closed): Langfuse (MIT outside `ee/`, free cloud tier, LangGraph and CrewAI support); both frameworks trace to one backend; public trace links only for synthetic runs; Phoenix possible later via OpenTelemetry. Research: `07-research.md`.
 - [Demo privacy](13-demo-privacy-and-synthetic-portfolio.md) (closed): no personalization in v1, ticker-only analysis; fixed never-copy list; pre-push check is a local hook plus a CI job running gitleaks and a personal-path grep.
 - [Analysis schema and engine interface](02-analysis-schema-and-engine-interface.md) (closed): headline is a news lean (positive/negative/mixed/unclear), not buy/hold/sell; evidence chain claim, fact, quote, each link checked in code; engine is a pure function over a snapshot with news fetching in separate adapters; output exposes per-agent attribution and the Critic's flags; confidence is computed by code, not reported by the model. Vocabulary lives in `GLOSSARY.md`.
+- [Full-article fetching](15-full-article-fetching.md) (closed): not in v1; Triage reads GDELT headlines and EDGAR filing text; the README states that headline-based analyses are shallow and often `unclear`; a fetcher could be a later adapter and its own ticket.
 - [Relationship to Freeman](14-relationship-to-freeman.md) (closed): standalone showcase that shares only the domain; no Freeman integration in v1; any future integration is its own ticket.
 - [Cost and latency budget](09-cost-and-latency-budget.md) (closed): two model tiers (Haiku 5.5 for Triage and the writer, Sonnet 5.5 for Bull, Bear, Risk and the Critic); editable caps (20 sources, 2,000 characters each, 12 calls, $0.25 per run); 45 s per call and 120 s per run; no cache in the engine, the service caches by snapshot hash, evals get an optional record/replay cache.
 - [Output and abstention policy](04-output-and-abstention-policy.md) (closed): thin means under 3 usable sources or under 2 publishers (news 7 days, filings 90 days); a written confidence rubric computed by code; three layers against predictions and advice (prompt, Critic, code lint); fixed disclaimer string; no human approval in v1.
@@ -42,7 +43,7 @@ Hosting and deploy target, the UI, where MCP fits, memory across runs, live pric
 - The earlier PR code-review idea (archived in `archive/`).
 
 ## Open tickets
-See the `NN-*.md` files in this folder; each lists its type and what blocks it. Frontier: 10, 15. Closed: 01, 02, 03, 04, 06, 07, 08, 09, 12, 13, 14.
+See the `NN-*.md` files in this folder; each lists its type and what blocks it. Frontier: 10. Closed: 01, 02, 03, 04, 06, 07, 08, 09, 12, 13, 14, 15.
 
 ## Archive
 `archive/` holds the retired PR-review tickets 05 (eval datasets) and 11 (GitHub Action constraints) with their research notes. Their licence findings were verified on 2026-11-23: CVEfixes source MIT and data CC BY 4.0, BugsJS, SWE-bench and AgentDojo MIT, BugsInPy has no licence.

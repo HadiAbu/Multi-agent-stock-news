@@ -178,7 +178,7 @@ Privacy: ticker-only analysis, no personalization. Never committed: keys, `.env`
 
 ## 15. Delivery phases
 
-1. Engine: schema, snapshot adapters, Triage with quote verification, agents, graph, grounding, lint, confidence, caps.
+1. Engine: schema, Triage with quote verification, agents, graph, grounding, lint, confidence, caps, privacy scan and CI (plan: `docs/superpowers/plans/2026-11-23-engine-phase-1.md`). The GDELT and EDGAR fetch adapters follow as their own plan, because they need live API checks first (GDELT field names were never verified, and EDGAR needs a declared User-Agent); the engine takes a `Snapshot`, so it does not wait for them.
 2. Evals, replay CI and tracing; first live run and README results table.
 3. LangGraph vs CrewAI: predictions committed, pilot, full run, `docs/comparison.md`.
 4. FastAPI service repo, then a small UI repo.

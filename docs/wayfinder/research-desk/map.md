@@ -21,6 +21,7 @@ A design spec for an open-source "research desk". Given a ticker and a news snap
 - Tracing candidate: Langfuse (MIT outside `ee/`, free tier, LangGraph and CrewAI support); see `07-research.md`. Not yet closed.
 - [Demo privacy](13-demo-privacy-and-synthetic-portfolio.md) (closed): no personalization in v1, ticker-only analysis; fixed never-copy list; pre-push check is a local hook plus a CI job running gitleaks and a personal-path grep.
 - [Analysis schema and engine interface](02-analysis-schema-and-engine-interface.md) (closed): headline is a news lean (positive/negative/mixed/unclear), not buy/hold/sell; evidence chain claim, fact, quote, each link checked in code; engine is a pure function over a snapshot with news fetching in separate adapters; output exposes per-agent attribution and the Critic's flags; confidence is computed by code, not reported by the model. Vocabulary lives in `GLOSSARY.md`.
+- [Output and abstention policy](04-output-and-abstention-policy.md) (closed): thin means under 3 usable sources or under 2 publishers (news 7 days, filings 90 days); a written confidence rubric computed by code; three layers against predictions and advice (prompt, Critic, code lint); fixed disclaimer string; no human approval in v1.
 - [Supervisor design](03-supervisor-design.md) (closed): graph routed by code, no LLM router; thin snapshot short-circuits to unclear; Triage then quote check, Bull/Bear/Risk in parallel, Critic with one revision round, writer proposes the lean and code checks it; graceful per-agent failure policy with one transient retry; in-memory state, no checkpointer.
 - [Repo and package layout](01-repo-and-package-layout.md) (closed): engine, evals and docs in this repo (`Multi-agent-stock-news`); FastAPI service and UI in later separate repos; Python `src/` package `stock_news_desk` managed by `uv`, consumed via git tags; Python only here; MIT licence; nothing copied wholesale from Freeman.
 - [Prompt-injection threat model](08-prompt-injection-threat-model.md) (closed): steering, forged citations and cost abuse are tested; leakage and tool abuse are ruled out by design (no tools or secrets for agents reading untrusted text). Only News-triage reads raw text and emits quote-verified facts; other agents see only those. Evals use about 20 paired clean/poisoned cases with code-checked pass criteria.
@@ -37,7 +38,7 @@ Hosting and deploy target, the UI, where MCP fits, memory across runs, live pric
 - The earlier PR code-review idea (archived in `archive/`).
 
 ## Open tickets
-See the `NN-*.md` files in this folder; each lists its type and what blocks it. Frontier: 04, 07, 09, 12 (research done, awaiting review), 14. Closed: 01, 02, 03, 08, 13.
+See the `NN-*.md` files in this folder; each lists its type and what blocks it. Frontier: 07, 09, 12 (research done, awaiting review), 14. Closed: 01, 02, 03, 04, 08, 13.
 
 ## Archive
 `archive/` holds the retired PR-review tickets 05 (eval datasets) and 11 (GitHub Action constraints) with their research notes. Their licence findings were verified on 2026-11-23: CVEfixes source MIT and data CC BY 4.0, BugsJS, SWE-bench and AgentDojo MIT, BugsInPy has no licence.

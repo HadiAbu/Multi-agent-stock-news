@@ -18,7 +18,7 @@ Vocabulary is fixed in `GLOSSARY.md` (Snapshot, Source, Quote, Fact, Claim, Cita
 - Snapshot: ticker, fetch time, list of sources. No position data (no personalization in v1).
 - Source: id (stable hash of the canonical URL), title, publisher, published date, URL, origin tag (such as `gdelt` or `edgar`), text (a title for GDELT, a filing excerpt for EDGAR).
 - Config: model choice, per-run token and call cap, which agents run.
-- The engine never touches the network for news. Fetching is a separate adapter layer that builds snapshots. Evals and CI feed frozen snapshots. Typed failures include "snapshot too thin" and "budget exceeded"; the engine never returns partially invented output.
+- The engine never touches the network for news. Fetching is a separate adapter layer that builds snapshots. Evals and CI feed frozen snapshots. Typed failures are "Triage failed", "budget exceeded" and "timed out"; the engine never returns partially invented output. (Corrected 2026-11-23: a thin snapshot is not a failure. It returns an `unclear` analysis with the reason and no model call, per the supervisor and abstention tickets.)
 
 **Output contract.**
 - Header: ticker, generated time, snapshot id and date range, model(s) used.

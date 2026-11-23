@@ -60,7 +60,7 @@ flowchart LR
 
 ## How the design is being done
 
-The work follows a "wayfinder" process: the project is charted as a map of small decision tickets, each resolved in its own session, and nothing is built until the design is approved. The map and tickets live in [`docs/wayfinder/research-desk/`](docs/wayfinder/research-desk/map.md).
+The work follows a "wayfinder" process: the project is charted as a map of small decision tickets, each resolved in its own session, and nothing is built until the design is approved. The map and tickets live in [`docs/wayfinder/research-desk/`](docs/wayfinder/research-desk/map.md), and the design they add up to is written in the [design spec](docs/superpowers/specs/2026-11-23-research-desk-design.md) (a draft under review).
 
 | Ticket | State |
 |---|---|

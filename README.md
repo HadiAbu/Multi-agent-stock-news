@@ -68,7 +68,8 @@ The work follows a "wayfinder" process: the project is charted as a map of small
 | Demo privacy | Closed |
 | Data sources and terms | Closed |
 | Tracing stack | Closed |
-| Eval metrics, LangGraph vs CrewAI protocol, full-article fetching | Open |
+| Eval metrics, snapshots and CI gating | Closed |
+| LangGraph vs CrewAI protocol, full-article fetching | Open |
 
 ## Roadmap
 

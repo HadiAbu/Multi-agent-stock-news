@@ -18,6 +18,7 @@ A design spec for an open-source "research desk". Given a ticker and a news snap
 - Pipeline in LangGraph; CrewAI rebuilds one agent (likely the Bull/Bear debate) for a head-to-head comparison.
 - Default model Anthropic, env-switchable.
 - Delivery: engine as a standalone package (this repo), then a FastAPI service and a small UI in their own repos.
+- [Eval metrics, snapshots and CI gating](06-eval-metrics-and-ci-gating.md) (closed): synthetic cases with designed answers (about 36 clean plus 20 poisoned, LLM-drafted and author-reviewed); mostly deterministic metrics plus one pinned judge for summary faithfulness; CI runs the evals in replay mode with no API key, live runs are manual or nightly; hard gates on advice-lint hits, invalid citations, injection pass rate and regression versus a committed baseline.
 - [Tracing stack](07-tracing-stack.md) (closed): Langfuse (MIT outside `ee/`, free cloud tier, LangGraph and CrewAI support); both frameworks trace to one backend; public trace links only for synthetic runs; Phoenix possible later via OpenTelemetry. Research: `07-research.md`.
 - [Demo privacy](13-demo-privacy-and-synthetic-portfolio.md) (closed): no personalization in v1, ticker-only analysis; fixed never-copy list; pre-push check is a local hook plus a CI job running gitleaks and a personal-path grep.
 - [Analysis schema and engine interface](02-analysis-schema-and-engine-interface.md) (closed): headline is a news lean (positive/negative/mixed/unclear), not buy/hold/sell; evidence chain claim, fact, quote, each link checked in code; engine is a pure function over a snapshot with news fetching in separate adapters; output exposes per-agent attribution and the Critic's flags; confidence is computed by code, not reported by the model. Vocabulary lives in `GLOSSARY.md`.
@@ -41,7 +42,7 @@ Hosting and deploy target, the UI, where MCP fits, memory across runs, live pric
 - The earlier PR code-review idea (archived in `archive/`).
 
 ## Open tickets
-See the `NN-*.md` files in this folder; each lists its type and what blocks it. Frontier: 06, 15. Closed: 01, 02, 03, 04, 07, 08, 09, 12, 13, 14. Blocked: 10 (on 06).
+See the `NN-*.md` files in this folder; each lists its type and what blocks it. Frontier: 10, 15. Closed: 01, 02, 03, 04, 06, 07, 08, 09, 12, 13, 14.
 
 ## Archive
 `archive/` holds the retired PR-review tickets 05 (eval datasets) and 11 (GitHub Action constraints) with their research notes. Their licence findings were verified on 2026-11-23: CVEfixes source MIT and data CC BY 4.0, BugsJS, SWE-bench and AgentDojo MIT, BugsInPy has no licence.

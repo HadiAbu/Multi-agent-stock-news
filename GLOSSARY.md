@@ -40,6 +40,12 @@ _Avoid_: Sandbox, sanitizer
 The Critic's decision on one claim: `accept`, `reject` or `revise`, with a reason.
 _Avoid_: Verdict, review, score
 
+### Evaluation
+
+**Case**:
+A synthetic snapshot with a designed answer: an expected lean or abstention, a list of planted facts, and the failure mode it tests.
+_Avoid_: Test, example, sample
+
 ### Output
 
 **News lean**:

@@ -18,7 +18,7 @@ A design spec for an open-source "research desk". Given a ticker and a news snap
 - Pipeline in LangGraph; CrewAI rebuilds one agent (likely the Bull/Bear debate) for a head-to-head comparison.
 - Default model Anthropic, env-switchable.
 - Delivery: engine as a standalone package (this repo), then a FastAPI service and a small UI in their own repos.
-- Tracing candidate: Langfuse (MIT outside `ee/`, free tier, LangGraph and CrewAI support); see `07-research.md`. Not yet closed.
+- [Tracing stack](07-tracing-stack.md) (closed): Langfuse (MIT outside `ee/`, free cloud tier, LangGraph and CrewAI support); both frameworks trace to one backend; public trace links only for synthetic runs; Phoenix possible later via OpenTelemetry. Research: `07-research.md`.
 - [Demo privacy](13-demo-privacy-and-synthetic-portfolio.md) (closed): no personalization in v1, ticker-only analysis; fixed never-copy list; pre-push check is a local hook plus a CI job running gitleaks and a personal-path grep.
 - [Analysis schema and engine interface](02-analysis-schema-and-engine-interface.md) (closed): headline is a news lean (positive/negative/mixed/unclear), not buy/hold/sell; evidence chain claim, fact, quote, each link checked in code; engine is a pure function over a snapshot with news fetching in separate adapters; output exposes per-agent attribution and the Critic's flags; confidence is computed by code, not reported by the model. Vocabulary lives in `GLOSSARY.md`.
 - [Relationship to Freeman](14-relationship-to-freeman.md) (closed): standalone showcase that shares only the domain; no Freeman integration in v1; any future integration is its own ticket.
@@ -27,7 +27,7 @@ A design spec for an open-source "research desk". Given a ticker and a news snap
 - [Supervisor design](03-supervisor-design.md) (closed): graph routed by code, no LLM router; thin snapshot short-circuits to unclear; Triage then quote check, Bull/Bear/Risk in parallel, Critic with one revision round, writer proposes the lean and code checks it; graceful per-agent failure policy with one transient retry; in-memory state, no checkpointer.
 - [Repo and package layout](01-repo-and-package-layout.md) (closed): engine, evals and docs in this repo (`Multi-agent-stock-news`); FastAPI service and UI in later separate repos; Python `src/` package `stock_news_desk` managed by `uv`, consumed via git tags; Python only here; MIT licence; nothing copied wholesale from Freeman.
 - [Prompt-injection threat model](08-prompt-injection-threat-model.md) (closed): steering, forged citations and cost abuse are tested; leakage and tool abuse are ruled out by design (no tools or secrets for agents reading untrusted text). Only News-triage reads raw text and emits quote-verified facts; other agents see only those. Evals use about 20 paired clean/poisoned cases with code-checked pass criteria.
-- Data plan candidate, from `12-research.md` (not yet closed, awaiting the author's read): do not commit Finnhub data (its terms bar redistributing data or derived results); use GDELT with citation and SEC EDGAR for the live demo; evals use synthetic or self-written articles, EDGAR excerpts and optionally GDELT title/URL/date metadata; CI uses fixtures and mocks, no live calls. Several points unverified in the note.
+- [Data sources and terms](12-data-sources-and-terms.md) (closed): no Finnhub data in the public repo or demo (terms bar redistribution); live demo on GDELT (cited) and SEC EDGAR; CI on committed fixtures with mocks; eval set of about 20-30 synthetic articles, a few EDGAR excerpts and optionally GDELT metadata. GDELT returns titles only, so Triage sees headlines unless articles are fetched. EDGAR's contact email comes from an environment variable. Research: `12-research.md`; several points unverified there.
 
 ## Not yet specified
 Hosting and deploy target, the UI, where MCP fits, memory across runs, live price or fundamentals data.
@@ -41,7 +41,7 @@ Hosting and deploy target, the UI, where MCP fits, memory across runs, live pric
 - The earlier PR code-review idea (archived in `archive/`).
 
 ## Open tickets
-See the `NN-*.md` files in this folder; each lists its type and what blocks it. Frontier: 07 (research done, awaiting decision), 12 (research done, awaiting review). Closed: 01, 02, 03, 04, 08, 09, 13, 14. Blocked: 06 and 15 (on 12), 10 (on 06).
+See the `NN-*.md` files in this folder; each lists its type and what blocks it. Frontier: 06, 15. Closed: 01, 02, 03, 04, 07, 08, 09, 12, 13, 14. Blocked: 10 (on 06).
 
 ## Archive
 `archive/` holds the retired PR-review tickets 05 (eval datasets) and 11 (GitHub Action constraints) with their research notes. Their licence findings were verified on 2026-11-23: CVEfixes source MIT and data CC BY 4.0, BugsJS, SWE-bench and AgentDojo MIT, BugsInPy has no licence.

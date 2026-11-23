@@ -40,7 +40,7 @@ flowchart LR
 | Framework comparison | One agent rebuilt in CrewAI, compared on quality, cost, latency and code size |
 | Models | Anthropic by default via `langchain-anthropic`, switchable by environment variable, a cheaper model for CI |
 | Evals | Frozen synthetic news snapshots, citation validity, unsupported-claim rate, abstention on thin news, and about 20 paired clean/poisoned prompt-injection cases |
-| Tracing | Langfuse is the leading candidate (decision still open) |
+| Tracing | Langfuse, with LangGraph and CrewAI runs traced to the same backend |
 | Delivery | Standalone Python engine package (`stock_news_desk`, built with `uv`) in this repo; a FastAPI service and a small UI later, each in its own repo |
 | Safety | Pre-push secret and path scanning, both as a local hook and in CI |
 
@@ -49,7 +49,7 @@ flowchart LR
 - **Domain:** stock-news research, with agents for triage, bull, bear, risk, critic and writing.
 - **Injection defence:** quarantine through the triage agent, with paired clean/poisoned evals. See the [threat model](docs/wayfinder/research-desk/08-prompt-injection-threat-model.md).
 - **Privacy:** ticker-only analysis in v1, no personalization, no personal data in prompts, traces or evals. See [demo privacy](docs/wayfinder/research-desk/13-demo-privacy-and-synthetic-portfolio.md).
-- **Data:** the candidate plan avoids committing data from sources whose terms forbid redistribution, and uses public sources plus synthetic articles for evals. Research note: [12-research.md](docs/wayfinder/research-desk/12-research.md) (still under review).
+- **Data:** no data from sources whose terms forbid redistribution is committed or shown. The live demo uses GDELT (cited) and SEC EDGAR, CI runs on fixtures with mocks, and the eval set is mostly synthetic articles plus a few EDGAR excerpts. GDELT supplies headlines only, so thin snapshots are expected. Research: [12-research.md](docs/wayfinder/research-desk/12-research.md).
 - **Out of scope:** price forecasts, trade execution, accounts, real personal data.
 
 ## How the design is being done
@@ -66,8 +66,8 @@ The work follows a "wayfinder" process: the project is charted as a map of small
 | Relationship to Freeman | Closed |
 | Prompt-injection threat model | Closed |
 | Demo privacy | Closed |
-| Data sources and terms | Research done, under review |
-| Tracing stack | Research done, decision open |
+| Data sources and terms | Closed |
+| Tracing stack | Closed |
 | Eval metrics, LangGraph vs CrewAI protocol, full-article fetching | Open |
 
 ## Roadmap

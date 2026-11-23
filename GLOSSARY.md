@@ -37,3 +37,7 @@ _Avoid_: Reference, link, footnote
 **News lean**:
 The headline verdict of an analysis: `positive`, `negative`, `mixed` or `unclear`, describing what the cited sources taken together suggest about the company's near-term outlook.
 _Avoid_: Stance, recommendation, signal, rating, buy/hold/sell
+
+**Confidence**:
+`low`, `medium` or `high`, computed by code from the evidence behind the news lean. It is never reported by a model.
+_Avoid_: Certainty, probability, score

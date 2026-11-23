@@ -20,6 +20,7 @@ A design spec for an open-source "research desk". Given a ticker and a news snap
 - Delivery: engine as a standalone package (this repo), then a FastAPI service and a small UI in their own repos.
 - Tracing candidate: Langfuse (MIT outside `ee/`, free tier, LangGraph and CrewAI support); see `07-research.md`. Not yet closed.
 - [Demo privacy](13-demo-privacy-and-synthetic-portfolio.md) (closed): no personalization in v1, ticker-only analysis; fixed never-copy list; pre-push check is a local hook plus a CI job running gitleaks and a personal-path grep.
+- [Analysis schema and engine interface](02-analysis-schema-and-engine-interface.md) (closed): headline is a news lean (positive/negative/mixed/unclear), not buy/hold/sell; evidence chain claim, fact, quote, each link checked in code; engine is a pure function over a snapshot with news fetching in separate adapters; output exposes per-agent attribution and the Critic's flags; confidence is computed by code, not reported by the model. Vocabulary lives in `GLOSSARY.md`.
 - [Repo and package layout](01-repo-and-package-layout.md) (closed): engine, evals and docs in this repo (`Multi-agent-stock-news`); FastAPI service and UI in later separate repos; Python `src/` package `stock_news_desk` managed by `uv`, consumed via git tags; Python only here; MIT licence; nothing copied wholesale from Freeman.
 - [Prompt-injection threat model](08-prompt-injection-threat-model.md) (closed): steering, forged citations and cost abuse are tested; leakage and tool abuse are ruled out by design (no tools or secrets for agents reading untrusted text). Only News-triage reads raw text and emits quote-verified facts; other agents see only those. Evals use about 20 paired clean/poisoned cases with code-checked pass criteria.
 - Data plan candidate, from `12-research.md` (not yet closed, awaiting the author's read): do not commit Finnhub data (its terms bar redistributing data or derived results); use GDELT with citation and SEC EDGAR for the live demo; evals use synthetic or self-written articles, EDGAR excerpts and optionally GDELT title/URL/date metadata; CI uses fixtures and mocks, no live calls. Several points unverified in the note.
@@ -35,7 +36,7 @@ Hosting and deploy target, the UI, where MCP fits, memory across runs, live pric
 - The earlier PR code-review idea (archived in `archive/`).
 
 ## Open tickets
-See the `NN-*.md` files in this folder; each lists its type and what blocks it. Frontier: 02, 07, 12 (research done, awaiting review), 14. Closed: 01, 08, 13.
+See the `NN-*.md` files in this folder; each lists its type and what blocks it. Frontier: 03, 04, 07, 12 (research done, awaiting review), 14. Closed: 01, 02, 08, 13.
 
 ## Archive
 `archive/` holds the retired PR-review tickets 05 (eval datasets) and 11 (GitHub Action constraints) with their research notes. Their licence findings were verified on 2026-11-23: CVEfixes source MIT and data CC BY 4.0, BugsJS, SWE-bench and AgentDojo MIT, BugsInPy has no licence.

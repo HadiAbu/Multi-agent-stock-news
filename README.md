@@ -59,11 +59,12 @@ The work follows a "wayfinder" process: the project is charted as a map of small
 | Ticket | State |
 |---|---|
 | Repo and package layout | Closed |
+| Analysis schema and engine interface | Closed |
 | Prompt-injection threat model | Closed |
 | Demo privacy | Closed |
 | Data sources and terms | Research done, under review |
 | Tracing stack | Research done, decision open |
-| Analysis schema, supervisor design, output and abstention policy, eval metrics, cost budget, LangGraph vs CrewAI protocol, relationship to Freeman, full-article fetching | Open |
+| Supervisor design, output and abstention policy, eval metrics, cost budget, LangGraph vs CrewAI protocol, relationship to Freeman, full-article fetching | Open |
 
 ## Roadmap
 

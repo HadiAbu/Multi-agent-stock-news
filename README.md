@@ -76,11 +76,11 @@ The work follows a "wayfinder" process: the project is charted as a map of small
 | Tracing stack | Closed |
 | Eval metrics, snapshots and CI gating | Closed |
 | Full-article fetching | Closed (not in v1) |
-| LangGraph vs CrewAI protocol | Open |
+| LangGraph vs CrewAI protocol | Closed |
 
 ## Roadmap
 
-1. Finish the design tickets and write the spec.
+1. Design tickets: done. Write the spec and the implementation plan.
 2. Engine package: schema, triage with quote verification, agents, supervisor, grounding.
 3. Evals and tracing, with results published in this README.
 4. LangGraph vs CrewAI comparison write-up.

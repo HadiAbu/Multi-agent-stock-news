@@ -22,6 +22,7 @@ A design spec for an open-source "research desk". Given a ticker and a news snap
 - [Tracing stack](07-tracing-stack.md) (closed): Langfuse (MIT outside `ee/`, free cloud tier, LangGraph and CrewAI support); both frameworks trace to one backend; public trace links only for synthetic runs; Phoenix possible later via OpenTelemetry. Research: `07-research.md`.
 - [Demo privacy](13-demo-privacy-and-synthetic-portfolio.md) (closed): no personalization in v1, ticker-only analysis; fixed never-copy list; pre-push check is a local hook plus a CI job running gitleaks and a personal-path grep.
 - [Analysis schema and engine interface](02-analysis-schema-and-engine-interface.md) (closed): headline is a news lean (positive/negative/mixed/unclear), not buy/hold/sell; evidence chain claim, fact, quote, each link checked in code; engine is a pure function over a snapshot with news fetching in separate adapters; output exposes per-agent attribution and the Critic's flags; confidence is computed by code, not reported by the model. Vocabulary lives in `GLOSSARY.md`.
+- [LangGraph vs CrewAI comparison protocol](10-langgraph-vs-crewai-comparison-protocol.md) (closed): CrewAI rebuilds the analysis round (Bull, Bear, Risk, Critic with its revision step) while everything before and after stays shared code; same model tier, prompts, cases and caps; all 56 cases with 3 runs each (pilot of about 10 first, worst-case cost about $84); predictions committed before running; reported without declaring a winner.
 - [Full-article fetching](15-full-article-fetching.md) (closed): not in v1; Triage reads GDELT headlines and EDGAR filing text; the README states that headline-based analyses are shallow and often `unclear`; a fetcher could be a later adapter and its own ticket.
 - [Relationship to Freeman](14-relationship-to-freeman.md) (closed): standalone showcase that shares only the domain; no Freeman integration in v1; any future integration is its own ticket.
 - [Cost and latency budget](09-cost-and-latency-budget.md) (closed): two model tiers (Haiku 5.5 for Triage and the writer, Sonnet 5.5 for Bull, Bear, Risk and the Critic); editable caps (20 sources, 2,000 characters each, 12 calls, $0.25 per run); 45 s per call and 120 s per run; no cache in the engine, the service caches by snapshot hash, evals get an optional record/replay cache.
@@ -43,7 +44,10 @@ Hosting and deploy target, the UI, where MCP fits, memory across runs, live pric
 - The earlier PR code-review idea (archived in `archive/`).
 
 ## Open tickets
-See the `NN-*.md` files in this folder; each lists its type and what blocks it. Frontier: 10. Closed: 01, 02, 03, 04, 06, 07, 08, 09, 12, 13, 14, 15.
+See the `NN-*.md` files in this folder; each lists its type and what blocks it. Frontier: none. All 13 tickets are closed: 01, 02, 03, 04, 06, 07, 08, 09, 10, 12, 13, 14, 15. The way is clear; the next step is writing the destination spec (see Arrival below).
+
+## Arrival
+Write the spec from the closed tickets, including the standing explanation of what each technology is used for and why. Then one `writing-plans` cycle per independent piece, each with its own approval. The remaining fog (hosting and deploy target, the UI, where MCP fits, memory across runs, live price or fundamentals data) belongs to later phases and the service and UI repos, not to the v1 engine spec.
 
 ## Archive
 `archive/` holds the retired PR-review tickets 05 (eval datasets) and 11 (GitHub Action constraints) with their research notes. Their licence findings were verified on 2026-11-23: CVEfixes source MIT and data CC BY 4.0, BugsJS, SWE-bench and AgentDojo MIT, BugsInPy has no licence.
